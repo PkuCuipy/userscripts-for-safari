@@ -27,7 +27,7 @@ document.addEventListener('keydown', (e) => {
 
 const enter_export_mode = () => {
     // 关闭侧边栏
-    if (document.querySelector("div.notion-sidebar-container").style.width > 0) {
+    if (document.querySelector("div.notion-sidebar-container").style.width !== "0px") {
         document.dispatchEvent(new KeyboardEvent("keydown", {
             keyCode: 220,   // `\`
             metaKey: true,
