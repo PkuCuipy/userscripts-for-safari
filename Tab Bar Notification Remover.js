@@ -40,12 +40,12 @@ if (window.location.hostname.match(/zhihu\.com/) !== null) {
             if (latent_prefix.match("私信") || latent_prefix.match("消息")) {
                 let new_title = curr_title.replace(latent_prefix, "");
                 document.title = new_title;
-                clearInterval(id);
+//                 clearInterval(id);        // zhihu 似乎会动态修改, 因此不再清除计时器!
             }
         }
     }, 1000);
     setTimeout(() => {    // 最多等 30s 加载
-       clearInterval(id);
+//        clearInterval(id);                 // zhihu 似乎会动态修改, 因此不再清除计时器!
     }, 30_000);
 }
 

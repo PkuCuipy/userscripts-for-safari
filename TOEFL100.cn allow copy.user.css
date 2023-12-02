@@ -1,0 +1,35 @@
+/* ==UserStyle==
+@name        Toefl100.cn Allow Copy
+@match       *://www.toefl100.cn/*
+==/UserStyle== */
+
+div, p {
+    -webkit-user-select: text !important;
+}
+
+.header-step-ad,
+.header-top-right-ad,
+.answer-sheet-ad,
+.article-alert-top {
+    display: none !important;
+}
+
+.article-alert {
+    width: 600px !important;
+    border: 1px solid grey;
+    color: black;
+    left: 5px !important;
+    bottom: 5px !important;
+    top: auto !important;
+    height: 330px !important;
+}
+
+.article-alert-bottom {
+    font-size: 0.9rem !important;
+    height: 300px !important;
+}
+
+.answer-sheet-box {
+/*     margin-left: 500px !important; */
+    margin-left: 650px !important;
+}

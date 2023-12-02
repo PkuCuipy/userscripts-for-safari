@@ -1,0 +1,16 @@
+/* ==UserStyle==
+@name        Better TOEFL Academic Writing Practice
+@match       https://ibt2-toefl-pt.ets.org/*
+==/UserStyle== */
+
+
+span.read-aloud {
+    user-select: text !important;
+    -webkit-user-select: text !important;
+}
+
+
+#stimulus-reference > div > div:nth-child(4),
+#stimulus-reference > div > p:nth-child(5) {
+    display: none;
+}
