@@ -1953,40 +1953,40 @@ const configManager = new ConfigManager({
         args: 1
       },
       {
-        desc: '设置2x的播放速度',
+        desc: '设置1.5x的播放速度',
         key: 'Digit2',
         command: 'setPlaybackRatePlus',
+        args: 1.5
+      },
+      {
+        desc: '设置1.5x的播放速度',
+        key: 'Numpad2',
+        command: 'setPlaybackRatePlus',
+        args: 1.5
+      },
+      {
+        desc: '设置2x的播放速度',
+        key: 'Digit3',
+        command: 'setPlaybackRatePlus',
         args: 2
       },
       {
         desc: '设置2x的播放速度',
-        key: 'Numpad2',
+        key: 'Numpad3',
         command: 'setPlaybackRatePlus',
         args: 2
       },
       {
         desc: '设置3x的播放速度',
-        key: 'Digit3',
+        key: 'Digit4',
         command: 'setPlaybackRatePlus',
         args: 3
       },
       {
         desc: '设置3x的播放速度',
-        key: 'Numpad3',
-        command: 'setPlaybackRatePlus',
-        args: 3
-      },
-      {
-        desc: '设置4x的播放速度',
-        key: 'Digit4',
-        command: 'setPlaybackRatePlus',
-        args: 4
-      },
-      {
-        desc: '设置4x的播放速度',
         key: 'Numpad4',
         command: 'setPlaybackRatePlus',
-        args: 4
+        args: 3
       },
       {
         desc: '下一帧',
