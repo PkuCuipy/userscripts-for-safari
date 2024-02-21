@@ -1,72 +1,46 @@
 // ==UserScript==
 // @name        Tab Bar Notification Remover
-// @description 知乎和 CSDN 在登录账户后, 如果有新通知, 则会在标签栏的标题中作为前缀显示. 这个脚本可以检测到这类前缀, 并自动去除它.
+// @description 某些网站会在标签栏的标题中显示通知数量, which is annoying, 本程序意在检测到这类前缀时自动去除它.
 // @match       *://blog.csdn.net/*
 // @match       *://www.zhihu.com/*
 // @match       *://www.youtube.com/*
-// update-time  2022-09-25, 2022-10-08
-// @inject-into content
+// @update-time 2022-09-25, 2022-10-08, 2024-02-22
 // ==/UserScript==
 
+(function() {
+    const hostname = window.location.hostname;
 
-if (window.location.hostname.match(/csdn\.net/) !== null) {
-    let id = setInterval(() => {
-        // 去除 CSDN 类似 "(4条消息) " 的前缀
-        console.log("尝试去除 CSDN 类似 (4条消息) 的前缀");
-        let curr_title = document.title;
-        let latent_prefix = curr_title.match(/\(\d+条消息\) /);
-        if (latent_prefix !== null) {
-            latent_prefix = latent_prefix[0];
-            if (latent_prefix.match("消息")) {
-                let new_title = curr_title.replace(latent_prefix, "");
-                document.title = new_title;
-                clearInterval(id);
+    // Define patterns for each site
+    const patterns = {
+        "csdn.net": /\(\d+条消息\) /,
+        "zhihu.com": /\(.*(?:私信|消息).*\) /,
+        "youtube.com": /\(\d+\) /
+    };
+
+    // Determine the current site's pattern
+    const patternID = Object.keys(patterns).find(domain => hostname.includes(domain));
+    if (!patternID) return; // Exit if the site is not in the list
+
+    // MutationObserver callback to handle title changes
+    const observerCallback = (mutations) => {
+        mutations.forEach((mutation) => {
+            if (mutation.type === "childList") {
+                let curr_title = document.title;
+                let match = curr_title.match(patterns[patternID]);
+                if (match) {
+                    document.title = curr_title.replace(match[0], "");
+                }
             }
-        }
-    }, 1000);
-    setTimeout(() => {    // 最多等 30s 加载
-       clearInterval(id);
-    }, 30_000);
-}
+        });
+    };
 
-
-if (window.location.hostname.match(/zhihu\.com/) !== null) {
-    let id = setInterval(() => {
-        // 去除 ｢知乎｣ 类似 "(4 封私信 / 1 条消息) " 的前缀
-        console.log("尝试去除 ｢知乎｣ 类似 (4 封私信 / 1 条消息)  的前缀");
-        let curr_title = document.title;
-        let latent_prefix = curr_title.match(/\(.*\) /);
-        if (latent_prefix !== null) {
-            latent_prefix = latent_prefix[0];
-            if (latent_prefix.match("私信") || latent_prefix.match("消息")) {
-                let new_title = curr_title.replace(latent_prefix, "");
-                document.title = new_title;
-//                 clearInterval(id);        // zhihu 似乎会动态修改, 因此不再清除计时器!
-            }
-        }
-    }, 1000);
-    setTimeout(() => {    // 最多等 30s 加载
-//        clearInterval(id);                 // zhihu 似乎会动态修改, 因此不再清除计时器!
-    }, 30_000);
-}
-
-
-if (window.location.hostname.match(/youtube\.com/) !== null) {
-    let id = setInterval(() => {
-        // 去除 YouTube 类似 "(39)" 的消息前缀
-        console.log("尝试去除 YouTube 类似 (39) 的消息前缀");
-        let curr_title = document.title;
-        let latent_prefix = curr_title.match(/\(\d+\) /);
-        console.log(latent_prefix);
-        if (latent_prefix !== null) {
-            latent_prefix = latent_prefix[0];
-            let new_title = curr_title.replace(latent_prefix, "");
-            document.title = new_title;
-            clearInterval(id);
-        }
-    }, 1000);
-    setTimeout(() => {    // 最多等 30s 加载
-       clearInterval(id);
-    }, 30_000);
-}
-
+    // Set up the observer
+    const observer = new MutationObserver(observerCallback);
+    const config = { childList: true, subtree: true };
+    const target = document.querySelector('head > title');
+    if (target) {
+        observer.observe(target.parentNode, config);
+    } else {
+        console.log("The <title> element does not exist.");
+    }
+})();
