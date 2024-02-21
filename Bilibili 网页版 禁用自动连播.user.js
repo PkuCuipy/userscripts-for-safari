@@ -1,24 +1,18 @@
 // ==UserScript==
-// @name        Bilibili Esc 取消连播
-// @description 当视频结尾时有 [自动连播] 按钮时, 按 Esc 取消自动连播, 相当于设置了一个快捷键. (如果 ALWAYS_CANCEL 为 true, 则一旦检测到这个按钮就自动点掉)
+// @name        Bilibili 网页版 禁用自动连播
 // @match       *://*.bilibili.com/*
 // @author      PkuCuipy with GPT-4
 // ==/UserScript==
 
-const ALWAYS_CANCEL = true;    // 改成 false 则用 Esc 手动取消; 否则默认永远取消连播
-
 // Create the banner element
 const banner = document.createElement('div');
 banner.style.cssText = `
-    position: fixed;
-    top: 50%;
-    left: 40%;
-    font-size: 1.3rem;
-    transform: translateX(-50%);
-    padding: 10px;
+    position: absolute;
+    font-size: 0.8rem;
+    padding: 3px 10px;
     background-color: rgba(0, 0, 0, 0.7);
     color: white;
-    border-radius: 5px;
+    border-bottom-right-radius: 5px;
     z-index: 1000;
     display: none;
     opacity: 0;
@@ -27,8 +21,16 @@ banner.style.cssText = `
 banner.textContent = "已取消自动连播";
 document.body.appendChild(banner);
 
+
 // Function to show the banner
 function showBanner() {
+    const videoElem = document.getElementById('bilibili-player');
+    if (videoElem) {
+        const rect = videoElem.getBoundingClientRect();
+        banner.style.top = `${rect.top}px`;
+        banner.style.left = `${rect.left}px`;
+    }
+
     banner.style.display = 'block';
     banner.style.opacity = '1';
     banner.style.visibility = 'visible';
@@ -40,24 +42,23 @@ function showBanner() {
     }, 3000);
 }
 
-function cancelAutoPlay() {
+
+// Every second, check for the cancel button's existence. if exists, click it to cancel auto-play
+setInterval(() => {
     const cancelButton = document.querySelector(".bpx-player-ending-related-item-cancel");
     if (cancelButton && cancelButton.style.display !== "none") {
         cancelButton.click();
         showBanner();
     }
-}
+}, 2000);
 
-if (ALWAYS_CANCEL) {
-    const intervalId = setInterval(cancelAutoPlay, 1000);
-    window.addEventListener('beforeunload', () => {
-        clearInterval(intervalId);
-    });
-} 
-else {
-    document.addEventListener('keydown', (event) => {
-        if (event.key === "Escape") {
-            cancelAutoPlay();
-        }
-    });
-}
+
+// Hide the "取消连播" button and the countdown animation
+const style = document.createElement('style');
+style.type = 'text/css';
+const css = `
+    .bpx-player-ending-related-item-countdown { display: none !important; }
+    .bpx-player-ending-related-item-cancel { display: none !important; }
+`;
+style.appendChild(document.createTextNode(css));
+document.head.appendChild(style);
