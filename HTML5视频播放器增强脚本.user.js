@@ -9,6 +9,7 @@
 // @author       ankvps
 // @match        *://*/*
 // @exclude      *://yiyan.baidu.com/*
+// @exclude      *://www.instagram.com/*
 // @exclude      *://*.bing.com/search*
 // @grant        unsafeWindow
 // @grant        GM_addStyle
