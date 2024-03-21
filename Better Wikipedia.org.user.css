@@ -1,0 +1,11 @@
+/* ==UserStyle==
+@name         Better Wikipedia.org
+@author       Pengyu Cui with ChatGPT
+@match        *://*.wikipedia.org/*
+==/UserStyle== */
+
+
+/* Hide Wikipedia Edit Buttons */
+.mw-editsection {
+    display: none !important;
+}
