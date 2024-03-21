@@ -11,6 +11,7 @@
 // @exclude      *://yiyan.baidu.com/*
 // @exclude      *://www.instagram.com/*
 // @exclude      *://*.bing.com/search*
+// @exclude      *://*.xiaohongshu.com/*
 // @grant        unsafeWindow
 // @grant        GM_addStyle
 // @grant        GM_setValue
@@ -28,8 +29,8 @@
 // @grant        GM_setClipboard
 // @run-at       document-start
 // @license      GPL
-// @downloadURL https://update.greasyfork.org/scripts/381682/HTML5%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%A2%9E%E5%BC%BA%E8%84%9A%E6%9C%AC.user.js
-// @updateURL https://update.greasyfork.org/scripts/381682/HTML5%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%A2%9E%E5%BC%BA%E8%84%9A%E6%9C%AC.meta.js
+// @downloadURL--- https://update.greasyfork.org/scripts/381682/HTML5%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%A2%9E%E5%BC%BA%E8%84%9A%E6%9C%AC.user.js
+// @updateURL--- https://update.greasyfork.org/scripts/381682/HTML5%E8%A7%86%E9%A2%91%E6%92%AD%E6%94%BE%E5%99%A8%E5%A2%9E%E5%BC%BA%E8%84%9A%E6%9C%AC.meta.js
 // ==/UserScript==
 (function (w) { if (w) { w.name = 'h5player'; } })();
 
