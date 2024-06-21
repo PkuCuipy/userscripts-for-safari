@@ -1,0 +1,9 @@
+/* ==UserStyle==
+@name        Hide Google Ads
+@match       <all_urls>
+==/UserStyle== */
+
+
+._ap_apex_ad {
+    display: none !important;
+}
