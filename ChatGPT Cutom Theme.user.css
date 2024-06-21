@@ -1,0 +1,16 @@
+/* ==UserStyle==
+@name        ChatGPT Cutom Theme
+@match       *://chat.openai.com/*
+@match       *://chatgpt.com/*
+@author      Pengyu Cui
+@date        2024-05-15
+==/UserStyle== */
+
+[data-message-author-role="user"] > div > div:last-child {    /*last-child is for cases where there's an image*/
+    background-color: rgb(62,132,247) !important;
+    color: white !important;
+}
+
+[data-message-author-role="user"] > div > div:last-child::selection { 
+    background-color: rgb(62,82,107) !important;
+}
