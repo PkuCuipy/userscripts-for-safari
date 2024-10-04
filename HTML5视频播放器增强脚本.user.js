@@ -12,6 +12,7 @@
 // @exclude      *://www.instagram.com/*
 // @exclude      *://*.bing.com/search*
 // @exclude      *://*.xiaohongshu.com/*
+// @exclude      *://*pkucuipy.github.io/*
 // @grant        unsafeWindow
 // @grant        GM_addStyle
 // @grant        GM_setValue
@@ -1904,11 +1905,11 @@ const configManager = new ConfigManager({
         command: 'setVolumeDown',
         args: [-0.2]
       },
-      {
-        desc: '切换暂停/播放',
-        key: 'space',
-        command: 'switchPlayStatus'
-      },
+//       {   // Cuipy Removed on 2024-08-31, Confliction in Udemy Player 
+//         desc: '切换暂停/播放',
+//         key: 'space',
+//         command: 'switchPlayStatus'
+//       },
       {
         desc: '减速播放 -0.1',
         key: 'x',
@@ -6787,6 +6788,9 @@ const h5Player = {
 
   /* 播放下一个视频，默认是没有这个功能的，只有在TCC里配置了next字段才会有该功能 */
   setNextVideo () {
+    console.log('(disabled) setNextVideo');
+    return  // TODO: 经常误触, Cuipy 禁用 (2024-08-24)
+
     const isDo = TCC$1.doTask('next');
     if (!isDo) {
       debug.log('当前网页不支持一键播放下个视频功能~');
@@ -7450,7 +7454,7 @@ const h5Player = {
     }
 
     if (key === 'n') {
-      t.setNextVideo();
+      t.setNextVideo();    
     }
 
     // 阻止事件冒泡
