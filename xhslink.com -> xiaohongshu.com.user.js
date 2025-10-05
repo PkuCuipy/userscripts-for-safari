@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name        xhslink.com -> xiaohongshu.com
 // @match       *://xhslink.com/*
+// @match       *://www.xhs.com/*
 // ==/UserScript==
 
-if (window.location.href.includes("xhslink")) {
-    window.open("https://www.xiaohongshu.com/explore","_self");
-}
+
+window.open("https://www.xiaohongshu.com/explore","_self");
 
